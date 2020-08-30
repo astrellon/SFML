@@ -28,6 +28,14 @@
 #include <SFML/Graphics/ImageLoader.hpp>
 #include <SFML/System/InputStream.hpp>
 #include <SFML/System/Err.hpp>
+
+#define STBI_NO_PSD 1
+#define STBI_NO_TGA 1
+#define STBI_NO_GIF 1
+#define STBI_NO_HDR 1
+#define STBI_NO_PIC 1
+#define STBI_NO_PNM 1
+
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -246,12 +254,6 @@ bool ImageLoader::saveImageToFile(const std::string& filename, const std::vector
         {
             // BMP format
             if (stbi_write_bmp(filename.c_str(), size.x, size.y, 4, &pixels[0]))
-                return true;
-        }
-        else if (extension == "tga")
-        {
-            // TGA format
-            if (stbi_write_tga(filename.c_str(), size.x, size.y, 4, &pixels[0]))
                 return true;
         }
         else if (extension == "png")
