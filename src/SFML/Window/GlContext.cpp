@@ -374,38 +374,38 @@ void GlContext::registerContextDestroyCallback(ContextDestroyCallback callback, 
 ////////////////////////////////////////////////////////////
 void GlContext::acquireTransientContext()
 {
-    // Protect from concurrent access
-    Lock lock(mutex);
+    // // Protect from concurrent access
+    // Lock lock(mutex);
 
-    // If this is the first TransientContextLock on this thread
-    // construct the state object
-    if (!transientContext)
-        transientContext = new TransientContext;
+    // // If this is the first TransientContextLock on this thread
+    // // construct the state object
+    // if (!transientContext)
+    //     transientContext = new TransientContext;
 
-    // Increase the reference count
-    transientContext->referenceCount++;
+    // // Increase the reference count
+    // transientContext->referenceCount++;
 }
 
 
 ////////////////////////////////////////////////////////////
 void GlContext::releaseTransientContext()
 {
-    // Protect from concurrent access
-    Lock lock(mutex);
+    // // Protect from concurrent access
+    // Lock lock(mutex);
 
-    // Make sure a matching acquireTransientContext() was called
-    assert(transientContext);
+    // // Make sure a matching acquireTransientContext() was called
+    // assert(transientContext);
 
-    // Decrease the reference count
-    transientContext->referenceCount--;
+    // // Decrease the reference count
+    // transientContext->referenceCount--;
 
-    // If this is the last TransientContextLock that is released
-    // destroy the state object
-    if (transientContext->referenceCount == 0)
-    {
-        delete transientContext;
-        transientContext = NULL;
-    }
+    // // If this is the last TransientContextLock that is released
+    // // destroy the state object
+    // if (transientContext->referenceCount == 0)
+    // {
+    //     delete transientContext;
+    //     transientContext = NULL;
+    // }
 }
 
 

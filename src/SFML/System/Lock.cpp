@@ -27,7 +27,7 @@
 ////////////////////////////////////////////////////////////
 #include <SFML/System/Lock.hpp>
 #include <SFML/System/Mutex.hpp>
-
+#include "../../../../../src/debug/draw_debug.hpp"
 
 namespace sf
 {
@@ -35,14 +35,16 @@ namespace sf
 Lock::Lock(Mutex& mutex) :
 m_mutex(mutex)
 {
-    m_mutex.lock();
+    space::DrawDebug::locksUsed++;
+    //m_mutex.lock();
 }
 
 
 ////////////////////////////////////////////////////////////
 Lock::~Lock()
 {
-    m_mutex.unlock();
+    //space::DrawDebug::locksUsed--;
+    //m_mutex.unlock();
 }
 
 } // namespace sf

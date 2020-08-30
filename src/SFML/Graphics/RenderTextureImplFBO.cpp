@@ -122,7 +122,7 @@ m_textureId         (0),
 m_multisample       (false),
 m_stencil           (false)
 {
-    Lock lock(mutex);
+    // Lock lock(mutex);
 
     // Register the context destruction callback
     registerContextDestroyCallback(contextDestroyCallback, 0);
@@ -136,9 +136,9 @@ m_stencil           (false)
 ////////////////////////////////////////////////////////////
 RenderTextureImplFBO::~RenderTextureImplFBO()
 {
-    TransientContextLock contextLock;
+    // TransientContextLock contextLock;
 
-    Lock lock(mutex);
+    // Lock lock(mutex);
 
     // Remove the frame buffer mapping from the set of all active mappings
     frameBuffers.erase(&m_frameBuffers);
@@ -176,7 +176,7 @@ RenderTextureImplFBO::~RenderTextureImplFBO()
 ////////////////////////////////////////////////////////////
 bool RenderTextureImplFBO::isAvailable()
 {
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     // Make sure that extensions are initialized
     priv::ensureExtensionsInit();
@@ -188,7 +188,7 @@ bool RenderTextureImplFBO::isAvailable()
 ////////////////////////////////////////////////////////////
 unsigned int RenderTextureImplFBO::getMaximumAntialiasingLevel()
 {
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     GLint samples = 0;
 
@@ -217,8 +217,6 @@ bool RenderTextureImplFBO::create(unsigned int width, unsigned int height, unsig
     m_height = height;
 
     {
-        TransientContextLock lock;
-
         // Make sure that extensions are initialized
         priv::ensureExtensionsInit();
 
@@ -538,7 +536,7 @@ bool RenderTextureImplFBO::activate(bool active)
         Lock lock(mutex);
 
         std::map<Uint64, unsigned int>::iterator iter;
-        
+
         if (m_multisample)
         {
             iter = m_multisampleFrameBuffers.find(contextId);

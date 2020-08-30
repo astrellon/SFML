@@ -107,7 +107,7 @@ Texture::~Texture()
     // Destroy the OpenGL texture
     if (m_texture)
     {
-        TransientContextLock lock;
+        // TransientContextLock lock;
 
         GLuint texture = static_cast<GLuint>(m_texture);
         glCheck(glDeleteTextures(1, &texture));
@@ -125,7 +125,7 @@ bool Texture::create(unsigned int width, unsigned int height)
         return false;
     }
 
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     // Make sure that extensions are initialized
     priv::ensureExtensionsInit();
@@ -275,7 +275,7 @@ bool Texture::loadFromImage(const Image& image, const IntRect& area)
         // Create the texture and upload the pixels
         if (create(rectangle.width, rectangle.height))
         {
-            TransientContextLock lock;
+            // TransientContextLock lock;
 
             // Make sure that the current texture binding will be preserved
             priv::TextureSaver save;
@@ -320,7 +320,7 @@ Image Texture::copyToImage() const
     if (!m_texture)
         return Image();
 
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     // Make sure that the current texture binding will be preserved
     priv::TextureSaver save;
@@ -411,7 +411,7 @@ void Texture::update(const Uint8* pixels, unsigned int width, unsigned int heigh
 
     if (pixels && m_texture)
     {
-        TransientContextLock lock;
+        // TransientContextLock lock;
 
         // Make sure that the current texture binding will be preserved
         priv::TextureSaver save;
@@ -451,7 +451,7 @@ void Texture::update(const Texture& texture, unsigned int x, unsigned int y)
 #ifndef SFML_OPENGL_ES
 
     {
-        TransientContextLock lock;
+        // TransientContextLock lock;
 
         // Make sure that extensions are initialized
         priv::ensureExtensionsInit();
@@ -459,7 +459,7 @@ void Texture::update(const Texture& texture, unsigned int x, unsigned int y)
 
     if (GLEXT_framebuffer_object && GLEXT_framebuffer_blit)
     {
-        TransientContextLock lock;
+        // TransientContextLock lock;
 
         // Save the current bindings so we can restore them after we are done
         GLint readFramebuffer = 0;
@@ -570,7 +570,7 @@ void Texture::update(const Window& window, unsigned int x, unsigned int y)
 
     if (m_texture && window.setActive(true))
     {
-        TransientContextLock lock;
+        // TransientContextLock lock;
 
         // Make sure that the current texture binding will be preserved
         priv::TextureSaver save;
@@ -599,7 +599,7 @@ void Texture::setSmooth(bool smooth)
 
         if (m_texture)
         {
-            TransientContextLock lock;
+            // TransientContextLock lock;
 
             // Make sure that the current texture binding will be preserved
             priv::TextureSaver save;
@@ -650,7 +650,7 @@ void Texture::setRepeated(bool repeated)
 
         if (m_texture)
         {
-            TransientContextLock lock;
+            // TransientContextLock lock;
 
             // Make sure that the current texture binding will be preserved
             priv::TextureSaver save;
@@ -692,7 +692,7 @@ bool Texture::generateMipmap()
     if (!m_texture)
         return false;
 
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     // Make sure that extensions are initialized
     priv::ensureExtensionsInit();
@@ -719,7 +719,7 @@ void Texture::invalidateMipmap()
     if (!m_hasMipmap)
         return;
 
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     // Make sure that the current texture binding will be preserved
     priv::TextureSaver save;
@@ -734,7 +734,7 @@ void Texture::invalidateMipmap()
 ////////////////////////////////////////////////////////////
 void Texture::bind(const Texture* texture, CoordinateType coordinateType)
 {
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     if (texture && texture->m_texture)
     {
@@ -799,7 +799,7 @@ unsigned int Texture::getMaximumSize()
     {
         checked = true;
 
-        TransientContextLock lock;
+        // TransientContextLock lock;
 
         glCheck(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size));
     }

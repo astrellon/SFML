@@ -211,7 +211,7 @@ struct Shader::UniformBinder : private NonCopyable
             glCheck(GLEXT_glUseProgramObject(savedProgram));
     }
 
-    TransientContextLock lock;           //!< Lock to keep context active while uniform is bound
+    // TransientContextLock lock;           //!< Lock to keep context active while uniform is bound
     GLEXT_GLhandle       savedProgram;   //!< Handle to the previously active program object
     GLEXT_GLhandle       currentProgram; //!< Handle to the program object of the modified sf::Shader instance
     GLint                location;       //!< Uniform location, used by the surrounding sf::Shader code
@@ -231,7 +231,7 @@ m_uniforms      ()
 ////////////////////////////////////////////////////////////
 Shader::~Shader()
 {
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     // Destroy effect program
     if (m_shaderProgram)
@@ -545,7 +545,7 @@ void Shader::setUniform(const std::string& name, const Texture& texture)
 {
     if (m_shaderProgram)
     {
-        TransientContextLock lock;
+        // TransientContextLock lock;
 
         // Find the location of the variable in the shader
         int location = getUniformLocation(name);
@@ -580,7 +580,7 @@ void Shader::setUniform(const std::string& name, CurrentTextureType)
 {
     if (m_shaderProgram)
     {
-        TransientContextLock lock;
+        // TransientContextLock lock;
 
         // Find the location of the variable in the shader
         m_currentTexture = getUniformLocation(name);
@@ -740,7 +740,7 @@ unsigned int Shader::getNativeHandle() const
 ////////////////////////////////////////////////////////////
 void Shader::bind(const Shader* shader)
 {
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     // Make sure that we can use shaders
     if (!isAvailable())
@@ -782,7 +782,7 @@ bool Shader::isAvailable()
     {
         checked = true;
 
-        TransientContextLock contextLock;
+        // TransientContextLock contextLock;
 
         // Make sure that extensions are initialized
         sf::priv::ensureExtensionsInit();
@@ -810,7 +810,7 @@ bool Shader::isGeometryAvailable()
     {
         checked = true;
 
-        TransientContextLock contextLock;
+        // TransientContextLock contextLock;
 
         // Make sure that extensions are initialized
         sf::priv::ensureExtensionsInit();
@@ -825,7 +825,7 @@ bool Shader::isGeometryAvailable()
 ////////////////////////////////////////////////////////////
 bool Shader::compile(const char* vertexShaderCode, const char* geometryShaderCode, const char* fragmentShaderCode)
 {
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     // First make sure that we can use shaders
     if (!isAvailable())

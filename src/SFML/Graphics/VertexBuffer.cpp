@@ -118,7 +118,7 @@ VertexBuffer::~VertexBuffer()
 {
     if (m_buffer)
     {
-        TransientContextLock contextLock;
+        // TransientContextLock contextLock;
 
         glCheck(GLEXT_glDeleteBuffers(1, &m_buffer));
     }
@@ -131,7 +131,7 @@ bool VertexBuffer::create(std::size_t vertexCount)
     if (!isAvailable())
         return false;
 
-    TransientContextLock contextLock;
+    // TransientContextLock contextLock;
 
     if (!m_buffer)
         glCheck(GLEXT_glGenBuffers(1, &m_buffer));
@@ -179,7 +179,7 @@ bool VertexBuffer::update(const Vertex* vertices, std::size_t vertexCount, unsig
     if (offset && (offset + vertexCount > m_size))
         return false;
 
-    TransientContextLock contextLock;
+    // TransientContextLock contextLock;
 
     glCheck(GLEXT_glBindBuffer(GLEXT_GL_ARRAY_BUFFER, m_buffer));
 
@@ -211,7 +211,7 @@ bool VertexBuffer::update(const VertexBuffer& vertexBuffer)
     if (!m_buffer || !vertexBuffer.m_buffer)
         return false;
 
-    TransientContextLock contextLock;
+    // TransientContextLock contextLock;
 
     // Make sure that extensions are initialized
     sf::priv::ensureExtensionsInit();
@@ -295,7 +295,7 @@ void VertexBuffer::bind(const VertexBuffer* vertexBuffer)
     if (!isAvailable())
         return;
 
-    TransientContextLock lock;
+    // TransientContextLock lock;
 
     glCheck(GLEXT_glBindBuffer(GLEXT_GL_ARRAY_BUFFER, vertexBuffer ? vertexBuffer->m_buffer : 0));
 }
@@ -341,7 +341,7 @@ bool VertexBuffer::isAvailable()
     {
         checked = true;
 
-        TransientContextLock contextLock;
+        // TransientContextLock contextLock;
 
         // Make sure that extensions are initialized
         sf::priv::ensureExtensionsInit();
