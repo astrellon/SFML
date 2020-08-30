@@ -6,7 +6,6 @@ addons:
     - libxrandr-dev
     - libudev-dev
     - libopenal-dev
-    - libflac-dev
     - libvorbis-dev
     - g++
     - clang
@@ -28,7 +27,7 @@ matrix:
     compiler: gcc
     env:
       - CMAKE_FLAGS="-DSFML_BUILD_TEST_SUITE=TRUE"
-  
+
   - name: "Linux gcc Static"
     os: linux
     dist: xenial
@@ -93,9 +92,9 @@ matrix:
         - build-tools-26.0.1
     env:
       - CMAKE_FLAGS="-DCMAKE_SYSTEM_NAME=Android -DSFML_BUILD_TEST_SUITE=FALSE -DCMAKE_ANDROID_NDK=$TRAVIS_BUILD_DIR/android-ndk-r18b -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a -DCMAKE_ANDROID_NDK_TOOLCHAIN_VERSION=clang -DCMAKE_ANDROID_STL_TYPE=c++_shared -DCMAKE_ANDROID_API=26"
-    
+
     install: &androidInstall
-      - echo y | sdkmanager "cmake;3.10.2.4988404" 
+      - echo y | sdkmanager "cmake;3.10.2.4988404"
       - sudo ln -sf /usr/local/android-sdk/cmake/3.10.2.4988404/bin/cmake /usr/bin/cmake
       - wget https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.zip
       - unzip -qq android-ndk-r18b-linux-x86_64.zip

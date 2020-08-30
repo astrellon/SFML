@@ -90,9 +90,6 @@ int main()
     // Play music from an ogg file
     playMusic("orchestral.ogg");
 
-    // Play music from a flac file
-    playMusic("ding.flac");
-
     // Wait until the user presses 'enter' key
     std::cout << "Press enter to exit..." << std::endl;
     std::cin.ignore(10000, '\n');

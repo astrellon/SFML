@@ -17,4 +17,3 @@ Permission is granted to anyone to use this software for any purpose, including 
   * _freetype_ is under the FreeType license or the GPL license
   * _libogg_ is under the BSD license
   * _libvorbis_ is under the BSD license
-  * _libflac_ is under the BSD license

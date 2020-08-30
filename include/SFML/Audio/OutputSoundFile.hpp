@@ -62,7 +62,7 @@ public:
     ////////////////////////////////////////////////////////////
     /// \brief Open the sound file from the disk for writing
     ///
-    /// The supported audio formats are: WAV, OGG/Vorbis, FLAC.
+    /// The supported audio formats are: WAV, OGG/Vorbis.
     ///
     /// \param filename     Path of the sound file to write
     /// \param sampleRate   Sample rate of the sound

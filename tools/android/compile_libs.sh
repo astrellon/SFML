@@ -40,10 +40,6 @@ PREFIX="--prefix=$DESTDIR/$1/usr need_version=no"
 cd $LOCALDIR/build/libogg-* && sed -i 's/-version-info/-avoid-version/g' src/Makefile.in src/Makefile.am && ./configure $HOST $PREFIX --enable-shared=no && make && make install
 rm $DESTDIR/$1/usr/lib/libogg*.so*
 
-# Compile FLAC
-cd  $LOCALDIR/build/flac-* && sed -i 's/-version-info/-avoid-version/g' src/libFLAC/Makefile.in src/libFLAC/Makefile.am && ./configure $HOST $PREFIX --enable-shared=no && make && make install
-rm $DESTDIR/$1/usr/lib/libFLAC*.so*
-
 # Compile VORBIS
 cd  $LOCALDIR/build/libvorbis-* && sed -i 's/-version-info/-avoid-version/g' lib/Makefile.in lib/Makefile.am && ./configure $HOST $PREFIX --enable-shared=no && make && make install
 rm $DESTDIR/$1/usr/lib/libvorbis*.so*

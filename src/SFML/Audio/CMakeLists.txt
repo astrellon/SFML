@@ -39,15 +39,11 @@ set(CODECS_SRC
     ${INCROOT}/SoundFileFactory.hpp
     ${INCROOT}/SoundFileFactory.inl
     ${INCROOT}/SoundFileReader.hpp
-    ${SRCROOT}/SoundFileReaderFlac.hpp
-    ${SRCROOT}/SoundFileReaderFlac.cpp
     ${SRCROOT}/SoundFileReaderOgg.hpp
     ${SRCROOT}/SoundFileReaderOgg.cpp
     ${SRCROOT}/SoundFileReaderWav.hpp
     ${SRCROOT}/SoundFileReaderWav.cpp
     ${INCROOT}/SoundFileWriter.hpp
-    ${SRCROOT}/SoundFileWriterFlac.hpp
-    ${SRCROOT}/SoundFileWriterFlac.cpp
     ${SRCROOT}/SoundFileWriterOgg.hpp
     ${SRCROOT}/SoundFileWriterOgg.cpp
     ${SRCROOT}/SoundFileWriterWav.hpp
@@ -68,11 +64,9 @@ endif()
 # find external libraries
 sfml_find_package(OpenAL INCLUDE "OPENAL_INCLUDE_DIR" LINK "OPENAL_LIBRARY")
 sfml_find_package(VORBIS INCLUDE "VORBIS_INCLUDE_DIRS" LINK "VORBIS_LIBRARIES")
-sfml_find_package(FLAC INCLUDE "FLAC_INCLUDE_DIR" LINK "FLAC_LIBRARY")
 
 # avoids warnings in vorbisfile.h
 target_compile_definitions(VORBIS INTERFACE "OV_EXCLUDE_STATIC_CALLBACKS")
-target_compile_definitions(FLAC INTERFACE "FLAC__NO_DLL")
 
 # define the sfml-audio target
 sfml_add_library(sfml-audio
@@ -86,5 +80,4 @@ if(SFML_OS_ANDROID)
 endif()
 
 target_link_libraries(sfml-audio
-                      PUBLIC sfml-system
-                      PRIVATE VORBIS FLAC)
+                      PUBLIC sfml-system)
