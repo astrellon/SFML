@@ -87,6 +87,23 @@ public:
     const float* getMatrix() const;
 
     ////////////////////////////////////////////////////////////
+    /// \brief Return the transform as a 4x4 matrix
+    ///
+    /// This function returns a pointer to an array of 16 floats
+    /// containing the transform elements as a 4x4 matrix, which
+    /// is directly compatible with OpenGL functions.
+    ///
+    /// \code
+    /// sf::Transform transform = ...;
+    /// glLoadMatrixf(transform.getMatrix());
+    /// \endcode
+    ///
+    /// \return Pointer to a 4x4 matrix
+    ///
+    ////////////////////////////////////////////////////////////
+    float* getMatrix();
+
+    ////////////////////////////////////////////////////////////
     /// \brief Return the inverse of the transform
     ///
     /// If the inverse cannot be computed, an identity transform

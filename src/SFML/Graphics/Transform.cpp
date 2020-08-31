@@ -64,6 +64,11 @@ const float* Transform::getMatrix() const
     return m_matrix;
 }
 
+float* Transform::getMatrix()
+{
+    return m_matrix;
+}
+
 
 ////////////////////////////////////////////////////////////
 Transform Transform::getInverse() const
