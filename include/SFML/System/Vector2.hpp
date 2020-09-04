@@ -25,6 +25,7 @@
 #ifndef SFML_VECTOR2_HPP
 #define SFML_VECTOR2_HPP
 
+#include <iostream>
 
 namespace sf
 {
@@ -74,7 +75,11 @@ public:
     ////////////////////////////////////////////////////////////
     T x; //!< X coordinate of the vector
     T y; //!< Y coordinate of the vector
+
 };
+
+template <typename T>
+std::ostream &operator <<(std::ostream &out, const Vector2<T> &in);
 
 ////////////////////////////////////////////////////////////
 /// \relates Vector2

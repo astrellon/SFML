@@ -52,6 +52,12 @@ y(static_cast<T>(vector.y))
 {
 }
 
+template <typename T>
+inline std::ostream &operator <<(std::ostream &out, const Vector2<T> &in)
+{
+    out << in.x << ", " << in.y;
+    return out;
+}
 
 ////////////////////////////////////////////////////////////
 template <typename T>
