@@ -26,6 +26,7 @@
 #define SFML_VECTOR2_HPP
 
 #include <iostream>
+#include <math.h>
 
 namespace sf
 {
@@ -76,6 +77,12 @@ public:
     T x; //!< X coordinate of the vector
     T y; //!< Y coordinate of the vector
 
+    float length() const;
+    float lengthSquared() const;
+    float dot(const Vector2<T> &other) const;
+
+    Vector2<float> normalised() const;
+    Vector2<float> clampLength(float minLength, float maxLength) const;
 };
 
 template <typename T>

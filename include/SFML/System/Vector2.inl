@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 
 
+
 ////////////////////////////////////////////////////////////
 template <typename T>
 inline Vector2<T>::Vector2() :
@@ -50,6 +51,45 @@ inline Vector2<T>::Vector2(const Vector2<U>& vector) :
 x(static_cast<T>(vector.x)),
 y(static_cast<T>(vector.y))
 {
+}
+
+template <typename T>
+inline float Vector2<T>::length() const
+{
+    return std::sqrt(lengthSquared());
+}
+
+template <typename T>
+inline float Vector2<T>::lengthSquared() const
+{
+    return dot(*this);
+}
+
+template <typename T>
+inline float Vector2<T>::dot(const Vector2<T> &other) const
+{
+    return x * other.x + y * other.y;
+}
+
+template <typename T>
+inline Vector2<float> Vector2<T>::normalised() const
+{
+    auto len = length();
+    return Vector2<float>(static_cast<float>(x) / len, static_cast<float>(y) / len);
+}
+
+template <typename T>
+inline Vector2<float> Vector2<T>::clampLength(float minLength, float maxLength) const
+{
+    auto len = length();
+    if (len >= minLength && len <= maxLength)
+    {
+        return static_cast<Vector2<float>>(*this);
+    }
+
+    auto multiply = len < minLength ? minLength : maxLength;
+
+    return Vector2<float>(x / len * multiply, y / len * multiply);
 }
 
 template <typename T>
