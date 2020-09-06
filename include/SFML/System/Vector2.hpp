@@ -83,6 +83,9 @@ public:
 
     Vector2<float> normalised() const;
     Vector2<float> clampLength(float minLength, float maxLength) const;
+
+    template <typename U>
+    float cross(const Vector2<U> &other) const;
 };
 
 template <typename T>

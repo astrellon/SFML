@@ -93,6 +93,13 @@ inline Vector2<float> Vector2<T>::clampLength(float minLength, float maxLength) 
 }
 
 template <typename T>
+template <typename U>
+inline float Vector2<T>::cross(const Vector2<U> &other) const
+{
+    return static_cast<float>(x) * static_cast<float>(other.y) - static_cast<float>(y) * static_cast<float>(other.x);
+}
+
+template <typename T>
 inline std::ostream &operator <<(std::ostream &out, const Vector2<T> &in)
 {
     out << in.x << ", " << in.y;
