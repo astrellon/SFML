@@ -75,6 +75,10 @@ template <typename T>
 inline Vector2<float> Vector2<T>::normalised() const
 {
     auto len = length();
+    if (len < 0.00001f)
+    {
+        return Vector2<float>();
+    }
     return Vector2<float>(static_cast<float>(x) / len, static_cast<float>(y) / len);
 }
 
