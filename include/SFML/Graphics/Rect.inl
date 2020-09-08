@@ -156,6 +156,13 @@ sf::Vector2<T> Rect<T>::getSize() const
 
 ////////////////////////////////////////////////////////////
 template <typename T>
+inline std::ostream &operator <<(std::ostream &out, const Rect<T> &in)
+{
+    out << in.left << ", " << in.top << " " << in.width << " x " << in.height;
+    return out;
+}
+
+template <typename T>
 inline bool operator ==(const Rect<T>& left, const Rect<T>& right)
 {
     return (left.left == right.left) && (left.width == right.width) &&

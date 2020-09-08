@@ -30,6 +30,7 @@
 ////////////////////////////////////////////////////////////
 #include <SFML/System/Vector2.hpp>
 #include <algorithm>
+#include <iostream>
 
 
 namespace sf
@@ -179,6 +180,9 @@ public:
     T width;  //!< Width of the rectangle
     T height; //!< Height of the rectangle
 };
+
+template <typename T>
+std::ostream &operator <<(std::ostream &out, const Rect<T> &in);
 
 ////////////////////////////////////////////////////////////
 /// \relates Rect
