@@ -463,6 +463,38 @@ public:
     void setUniform(const std::string& name, const Texture& texture);
 
     ////////////////////////////////////////////////////////////
+    /// \brief Specify a texture as \p sampler2D uniform
+    ///
+    /// \a name is the name of the variable to change in the shader.
+    /// The corresponding parameter in the shader must be a 2D texture
+    /// (\p sampler2D GLSL type).
+    ///
+    /// Example:
+    /// \code
+    /// uniform sampler2D the_texture; // this is the variable in the shader
+    /// \endcode
+    /// \code
+    /// sf::Texture texture;
+    /// ...
+    /// shader.setUniform("the_texture", texture);
+    /// \endcode
+    /// It is important to note that \a texture must remain alive as long
+    /// as the shader uses it, no copy is made internally.
+    ///
+    /// To use the texture of the object being drawn, which cannot be
+    /// known in advance, you can pass the special value
+    /// sf::Shader::CurrentTexture:
+    /// \code
+    /// shader.setUniform("the_texture", sf::Shader::CurrentTexture).
+    /// \endcode
+    ///
+    /// \param name    Name of the texture in the shader
+    /// \param texture Texture to assign
+    ///
+    ////////////////////////////////////////////////////////////
+    void setUniform(const std::string& name, const Texture* texture);
+
+    ////////////////////////////////////////////////////////////
     /// \brief Specify current texture as \p sampler2D uniform
     ///
     /// This overload maps a shader texture variable to the

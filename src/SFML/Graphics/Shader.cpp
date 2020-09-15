@@ -574,6 +574,12 @@ void Shader::setUniform(const std::string& name, const Texture& texture)
     }
 }
 
+////////////////////////////////////////////////////////////
+void Shader::setUniform(const std::string& name, const Texture* texture)
+{
+    setUniform(name, *texture);
+}
+
 
 ////////////////////////////////////////////////////////////
 void Shader::setUniform(const std::string& name, CurrentTextureType)
