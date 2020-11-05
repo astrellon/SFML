@@ -81,6 +81,20 @@ public:
     /// \see move, getPosition
     ///
     ////////////////////////////////////////////////////////////
+    void setPosition(const Vector2i& position);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief set the position of the object
+    ///
+    /// This function completely overwrites the previous position.
+    /// See the move function to apply an offset based on the previous position instead.
+    /// The default position of a transformable object is (0, 0).
+    ///
+    /// \param position New position
+    ///
+    /// \see move, getPosition
+    ///
+    ////////////////////////////////////////////////////////////
     void setPosition(const Vector2f& position);
 
     ////////////////////////////////////////////////////////////

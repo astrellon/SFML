@@ -62,6 +62,11 @@ void Transformable::setPosition(float x, float y)
 
 
 ////////////////////////////////////////////////////////////
+void Transformable::setPosition(const Vector2i& position)
+{
+    setPosition(position.x, position.y);
+}
+
 void Transformable::setPosition(const Vector2f& position)
 {
     setPosition(position.x, position.y);
