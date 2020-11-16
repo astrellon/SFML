@@ -238,7 +238,11 @@ void Window::initialize()
     m_clock.restart();
 
     // Activate the window
-    setActive();
+    // TODO Handle Window failing to init better.
+    if (!setActive())
+    {
+        return;
+    }
 
     WindowBase::initialize();
 }
