@@ -85,7 +85,7 @@ public:
     /// \param characterSize  Base size of characters, in pixels
     ///
     ////////////////////////////////////////////////////////////
-    Text(const String& string, const Font& font, unsigned int characterSize = 30);
+    Text(const std::string& string, const Font& font, unsigned int characterSize = 30);
 
     ////////////////////////////////////////////////////////////
     /// \brief Set the text's string
@@ -106,7 +106,7 @@ public:
     /// \see getString
     ///
     ////////////////////////////////////////////////////////////
-    void setString(const String& string);
+    void setString(const std::string& string);
 
     ////////////////////////////////////////////////////////////
     /// \brief Set the text's font
@@ -202,24 +202,6 @@ public:
     ///
     /// \see getFillColor
     ///
-    /// \deprecated There is now fill and outline colors instead
-    /// of a single global color.
-    /// Use setFillColor() or setOutlineColor() instead.
-    ///
-    ////////////////////////////////////////////////////////////
-    SFML_DEPRECATED void setColor(const Color& color);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Set the fill color of the text
-    ///
-    /// By default, the text's fill color is opaque white.
-    /// Setting the fill color to a transparent color with an outline
-    /// will cause the outline to be displayed in the fill area of the text.
-    ///
-    /// \param color New fill color of the text
-    ///
-    /// \see getFillColor
-    ///
     ////////////////////////////////////////////////////////////
     void setFillColor(const Color& color);
 
@@ -267,7 +249,7 @@ public:
     /// \see setString
     ///
     ////////////////////////////////////////////////////////////
-    const String& getString() const;
+    const std::string& getString() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the text's font
@@ -322,20 +304,6 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     Uint32 getStyle() const;
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Get the fill color of the text
-    ///
-    /// \return Fill color of the text
-    ///
-    /// \see setFillColor
-    ///
-    /// \deprecated There is now fill and outline colors instead
-    /// of a single global color.
-    /// Use getFillColor() or getOutlineColor() instead.
-    ///
-    ////////////////////////////////////////////////////////////
-    SFML_DEPRECATED const Color& getColor() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the fill color of the text
@@ -435,7 +403,7 @@ private:
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    String              m_string;              //!< String to display
+    std::string              m_string;              //!< String to display
     const Font*         m_font;                //!< Font used to display the string
     unsigned int        m_characterSize;       //!< Base size of characters, in pixels
     float               m_letterSpacingFactor; //!< Spacing factor between letters

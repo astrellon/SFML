@@ -96,7 +96,7 @@ m_fontTextureId      (0)
 
 
 ////////////////////////////////////////////////////////////
-Text::Text(const String& string, const Font& font, unsigned int characterSize) :
+Text::Text(const std::string& string, const Font& font, unsigned int characterSize) :
 m_string             (string),
 m_font               (&font),
 m_characterSize      (characterSize),
@@ -117,7 +117,7 @@ m_fontTextureId      (0)
 
 
 ////////////////////////////////////////////////////////////
-void Text::setString(const String& string)
+void Text::setString(const std::string& string)
 {
     if (m_string != string)
     {
@@ -183,13 +183,6 @@ void Text::setStyle(Uint32 style)
 
 
 ////////////////////////////////////////////////////////////
-void Text::setColor(const Color& color)
-{
-    setFillColor(color);
-}
-
-
-////////////////////////////////////////////////////////////
 void Text::setFillColor(const Color& color)
 {
     if (color != m_fillColor)
@@ -237,7 +230,7 @@ void Text::setOutlineThickness(float thickness)
 
 
 ////////////////////////////////////////////////////////////
-const String& Text::getString() const
+const std::string& Text::getString() const
 {
     return m_string;
 }
@@ -279,13 +272,6 @@ Uint32 Text::getStyle() const
 
 
 ////////////////////////////////////////////////////////////
-const Color& Text::getColor() const
-{
-    return getFillColor();
-}
-
-
-////////////////////////////////////////////////////////////
 const Color& Text::getFillColor() const
 {
     return m_fillColor;
@@ -314,8 +300,8 @@ Vector2f Text::findCharacterPos(std::size_t index) const
         return Vector2f();
 
     // Adjust the index if it's out of range
-    if (index > m_string.getSize())
-        index = m_string.getSize();
+    if (index > m_string.size())
+        index = m_string.size();
 
     // Precompute the variables needed by the algorithm
     bool  isBold          = m_style & Bold;
@@ -411,7 +397,7 @@ void Text::ensureGeometryUpdate() const
     m_bounds = FloatRect();
 
     // No text: nothing to draw
-    if (m_string.isEmpty())
+    if (m_string.empty())
         return;
 
     // Compute values related to the text style
@@ -442,7 +428,7 @@ void Text::ensureGeometryUpdate() const
     float maxX = 0.f;
     float maxY = 0.f;
     Uint32 prevChar = 0;
-    for (std::size_t i = 0; i < m_string.getSize(); ++i)
+    for (std::size_t i = 0; i < m_string.size(); ++i)
     {
         Uint32 curChar = m_string[i];
 
