@@ -48,6 +48,8 @@ set(SRC
     ${INCROOT}/View.hpp
     ${SRCROOT}/Vertex.cpp
     ${INCROOT}/Vertex.hpp
+    ${SRCROOT}/Vertex3d.cpp
+    ${INCROOT}/Vertex3d.hpp
 )
 source_group("" FILES ${SRC})
 
@@ -70,6 +72,8 @@ set(DRAWABLES_SRC
     ${INCROOT}/VertexArray.hpp
     ${SRCROOT}/VertexBuffer.cpp
     ${INCROOT}/VertexBuffer.hpp
+    ${SRCROOT}/Vertex3dBuffer.cpp
+    ${INCROOT}/Vertex3dBuffer.hpp
 )
 source_group("drawables" FILES ${DRAWABLES_SRC})
 

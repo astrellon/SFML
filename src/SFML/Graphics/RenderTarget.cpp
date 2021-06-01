@@ -31,6 +31,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/VertexBuffer.hpp>
+#include <SFML/Graphics/Vertex3dBuffer.hpp>
 #include <SFML/Graphics/GLCheck.hpp>
 #include <SFML/Window/Context.hpp>
 #include <SFML/System/Mutex.hpp>
@@ -387,6 +388,71 @@ void RenderTarget::draw(const VertexBuffer& vertexBuffer, std::size_t firstVerte
     }
 }
 
+////////////////////////////////////////////////////////////
+void RenderTarget::draw(const Vertex3dBuffer& vertexBuffer, const RenderStates& states)
+{
+    draw(vertexBuffer, 0, vertexBuffer.getVertexCount(), states);
+}
+
+
+////////////////////////////////////////////////////////////
+void RenderTarget::draw(const Vertex3dBuffer& vertexBuffer, std::size_t firstVertex,
+                        std::size_t vertexCount, const RenderStates& states)
+{
+    // VertexBuffer not supported?
+    if (!Vertex3dBuffer::isAvailable())
+    {
+        err() << "sf::Vertex3dBuffer is not available, drawing skipped" << std::endl;
+        return;
+    }
+
+    // Sanity check
+    if (firstVertex > vertexBuffer.getVertexCount())
+        return;
+
+    // Clamp vertexCount to something that makes sense
+    vertexCount = std::min(vertexCount, vertexBuffer.getVertexCount() - firstVertex);
+
+    // Nothing to draw?
+    if (!vertexCount || !vertexBuffer.getNativeHandle())
+        return;
+
+    // GL_QUADS is unavailable on OpenGL ES
+    #ifdef SFML_OPENGL_ES
+        if (vertexBuffer.getPrimitiveType() == Quads)
+        {
+            err() << "sf::Quads primitive type is not supported on OpenGL ES platforms, drawing skipped" << std::endl;
+            return;
+        }
+    #endif
+
+    if (isActive(m_id) || setActive(true))
+    {
+        setupDraw(false, states);
+
+        // Bind vertex buffer
+        Vertex3dBuffer::bind(&vertexBuffer);
+
+        // Always enable texture coordinates
+        if (!m_cache.enable || !m_cache.texCoordsArrayEnabled)
+            glCheck(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
+
+        glCheck(glVertexPointer(3, GL_FLOAT, sizeof(Vertex), reinterpret_cast<const void*>(0)));
+        glCheck(glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), reinterpret_cast<const void*>(12)));
+        glCheck(glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), reinterpret_cast<const void*>(16)));
+
+        drawPrimitives(vertexBuffer.getPrimitiveType(), firstVertex, vertexCount);
+
+        // Unbind vertex buffer
+        Vertex3dBuffer::bind(NULL);
+
+        cleanupDraw(states);
+
+        // Update the cache
+        m_cache.useVertexCache = false;
+        m_cache.texCoordsArrayEnabled = true;
+    }
+}
 
 ////////////////////////////////////////////////////////////
 bool RenderTarget::setActive(bool active)

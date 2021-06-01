@@ -44,6 +44,7 @@ namespace sf
 {
 class Drawable;
 class VertexBuffer;
+class Vertex3dBuffer;
 
 ////////////////////////////////////////////////////////////
 /// \brief Base class for all render targets (window, texture, ...)
@@ -267,6 +268,26 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     void draw(const VertexBuffer& vertexBuffer, std::size_t firstVertex, std::size_t vertexCount, const RenderStates& states = RenderStates::Default);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Draw primitives defined by a vertex buffer
+    ///
+    /// \param vertexBuffer Vertex buffer
+    /// \param states       Render states to use for drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void draw(const Vertex3dBuffer& vertexBuffer, const RenderStates& states = RenderStates::Default);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Draw primitives defined by a vertex buffer
+    ///
+    /// \param vertexBuffer Vertex buffer
+    /// \param firstVertex  Index of the first vertex to render
+    /// \param vertexCount  Number of vertices to render
+    /// \param states       Render states to use for drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void draw(const Vertex3dBuffer& vertexBuffer, std::size_t firstVertex, std::size_t vertexCount, const RenderStates& states = RenderStates::Default);
 
     ////////////////////////////////////////////////////////////
     /// \brief Return the size of the rendering region of the target
