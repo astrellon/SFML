@@ -437,9 +437,9 @@ void RenderTarget::draw(const Vertex3dBuffer& vertexBuffer, std::size_t firstVer
         if (!m_cache.enable || !m_cache.texCoordsArrayEnabled)
             glCheck(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
 
-        glCheck(glVertexPointer(3, GL_FLOAT, sizeof(Vertex), reinterpret_cast<const void*>(0)));
-        glCheck(glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), reinterpret_cast<const void*>(12)));
-        glCheck(glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), reinterpret_cast<const void*>(16)));
+        glCheck(glVertexPointer(3, GL_FLOAT, sizeof(Vertex3d), reinterpret_cast<const void*>(0)));
+        glCheck(glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex3d), reinterpret_cast<const void*>(12)));
+        glCheck(glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex3d), reinterpret_cast<const void*>(16)));
 
         drawPrimitives(vertexBuffer.getPrimitiveType(), firstVertex, vertexCount);
 

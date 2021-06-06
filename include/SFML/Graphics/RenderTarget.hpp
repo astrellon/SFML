@@ -37,6 +37,7 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/Vertex.hpp>
+#include <SFML/Graphics/Vertex3d.hpp>
 #include <SFML/System/NonCopyable.hpp>
 
 
