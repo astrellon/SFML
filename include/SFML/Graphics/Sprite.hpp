@@ -34,6 +34,7 @@
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/Graphics/Rect.hpp>
 
+#include <array>
 
 namespace sf
 {
@@ -189,6 +190,8 @@ public:
     ////////////////////////////////////////////////////////////
     FloatRect getGlobalBounds() const;
 
+    const std::array<sf::Vertex, 6> &getVertices() const;
+
 private:
 
     ////////////////////////////////////////////////////////////
@@ -215,7 +218,7 @@ private:
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    Vertex         m_vertices[4]; //!< Vertices defining the sprite's geometry
+    std::array<Vertex, 6> m_vertices; //!< Vertices defining the sprite's geometry
     const Texture* m_texture;     //!< Texture of the sprite
     IntRect        m_textureRect; //!< Rectangle defining the area of the source texture to display
 };

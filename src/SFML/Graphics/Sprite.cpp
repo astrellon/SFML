@@ -92,6 +92,8 @@ void Sprite::setColor(const Color& color)
     m_vertices[1].color = color;
     m_vertices[2].color = color;
     m_vertices[3].color = color;
+    m_vertices[4].color = color;
+    m_vertices[5].color = color;
 }
 
 
@@ -134,13 +136,20 @@ FloatRect Sprite::getGlobalBounds() const
 
 
 ////////////////////////////////////////////////////////////
+const std::array<sf::Vertex, 6> &Sprite::getVertices() const
+{
+    return m_vertices;
+}
+
+
+////////////////////////////////////////////////////////////
 void Sprite::draw(RenderTarget& target, RenderStates states) const
 {
     if (m_texture)
     {
         states.transform *= getTransform();
         states.texture = m_texture;
-        target.draw(m_vertices, 4, TriangleStrip, states);
+        target.draw(m_vertices.data(), 6, Triangles, states);
     }
 }
 
@@ -153,7 +162,9 @@ void Sprite::updatePositions()
     m_vertices[0].position = Vector2f(0, 0);
     m_vertices[1].position = Vector2f(0, bounds.height);
     m_vertices[2].position = Vector2f(bounds.width, 0);
-    m_vertices[3].position = Vector2f(bounds.width, bounds.height);
+    m_vertices[3].position = Vector2f(0, bounds.height);
+    m_vertices[4].position = Vector2f(bounds.width, 0);
+    m_vertices[5].position = Vector2f(bounds.width, bounds.height);
 }
 
 
@@ -168,7 +179,9 @@ void Sprite::updateTexCoords()
     m_vertices[0].texCoords = Vector2f(left, top);
     m_vertices[1].texCoords = Vector2f(left, bottom);
     m_vertices[2].texCoords = Vector2f(right, top);
-    m_vertices[3].texCoords = Vector2f(right, bottom);
+    m_vertices[3].texCoords = Vector2f(left, bottom);
+    m_vertices[4].texCoords = Vector2f(right, top);
+    m_vertices[5].texCoords = Vector2f(right, bottom);
 }
 
 } // namespace sf
