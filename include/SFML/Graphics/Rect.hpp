@@ -124,6 +124,8 @@ public:
     ////////////////////////////////////////////////////////////
     bool contains(const Vector2<T>& point) const;
 
+    bool contains(const Rect<T> &other) const;
+
     ////////////////////////////////////////////////////////////
     /// \brief Check the intersection between two rectangles
     ///
@@ -171,6 +173,10 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     sf::Vector2<T> getSize() const;
+
+    T getRight() const;
+    T getBottom() const;
+    sf::Vector2<T> getCenter() const;
 
     ////////////////////////////////////////////////////////////
     // Member data

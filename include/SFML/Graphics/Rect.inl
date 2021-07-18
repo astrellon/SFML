@@ -86,6 +86,12 @@ bool Rect<T>::contains(T x, T y) const
     return (x >= minX) && (x < maxX) && (y >= minY) && (y < maxY);
 }
 
+template <typename T>
+bool Rect<T>::contains(const Rect<T>& box) const
+{
+    return left <= box.left && box.getRight() <= getRight() &&
+        top <= box.top && box.getBottom() <= getBottom();
+}
 
 ////////////////////////////////////////////////////////////
 template <typename T>
@@ -99,8 +105,8 @@ bool Rect<T>::contains(const Vector2<T>& point) const
 template <typename T>
 bool Rect<T>::intersects(const Rect<T>& rectangle) const
 {
-    Rect<T> intersection;
-    return intersects(rectangle, intersection);
+    return !(left >= rectangle.getRight() || getRight() <= rectangle.left ||
+        top >= rectangle.getBottom() || getBottom() <= rectangle.top);
 }
 
 
@@ -152,6 +158,24 @@ sf::Vector2<T> Rect<T>::getSize() const
 {
     return sf::Vector2<T>(width, height);
 }
+
+template <typename T>
+sf::Vector2<T> Rect<T>::getCenter() const
+{
+    return sf::Vector2<T>(left + width * 0.5f, top + height * 0.5f);
+}
+
+template <typename T>
+T Rect<T>::getRight() const
+{
+    return left + width;
+}
+template <typename T>
+T Rect<T>::getBottom() const
+{
+    return top + height;
+}
+
 
 
 ////////////////////////////////////////////////////////////
