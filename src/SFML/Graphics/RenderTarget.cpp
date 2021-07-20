@@ -149,6 +149,7 @@ void RenderTarget::clear(const Color& color)
     {
         // Unbind texture to fix RenderTexture preventing clear
         applyTexture(NULL);
+        applyShader(NULL);
 
         glCheck(glClearColor(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f));
         glCheck(glClear(GL_COLOR_BUFFER_BIT));
@@ -713,6 +714,8 @@ void RenderTarget::applyTexture(const Texture* texture)
 void RenderTarget::applyShader(const Shader* shader)
 {
     Shader::bind(shader);
+
+    m_cache.lastShaderProgramId = shader ? shader->getNativeHandle() : 0;
 }
 
 
@@ -761,8 +764,22 @@ void RenderTarget::setupDraw(bool useVertexCache, const RenderStates& states)
     }
 
     // Apply the shader
-    if (states.shader)
+    if (m_cache.enable)
+    {
+        auto newShaderId = states.shader ? states.shader->getNativeHandle() : 0;
+        if (m_cache.lastShaderProgramId != newShaderId)
+        {
+            applyShader(states.shader);
+        }
+    }
+    else if (states.shader)
+    {
         applyShader(states.shader);
+    }
+    else
+    {
+        applyShader(NULL);
+    }
 }
 
 
@@ -783,8 +800,8 @@ void RenderTarget::drawPrimitives(PrimitiveType type, std::size_t firstVertex, s
 void RenderTarget::cleanupDraw(const RenderStates& states)
 {
     // Unbind the shader, if any
-    if (states.shader)
-        applyShader(NULL);
+    // if (states.shader)
+    //     applyShader(NULL);
 
     // If the texture we used to draw belonged to a RenderTexture, then forcibly unbind that texture.
     // This prevents a bug where some drivers do not clear RenderTextures properly.
